@@ -1,0 +1,87 @@
+#api call for regiter user
+#call for creating
+###
+POST http://127.0.0.1:8000/v1/complaints/register/
+Content-Type: application/json
+
+{
+    "username":"user",
+    "first_name":"peter",
+    "last_name":"parker",
+    "email":"user@gmail.com",
+    "password":"user@123"
+}
+
+#api call for token generation
+###
+POST http://127.0.0.1:8000/v1/complaints/token/
+Content-Type: application/json
+
+{
+    "username":"user",
+    "password":"password@123"
+}
+
+
+#complaints endpoints
+#for listing all
+###
+GET http://127.0.0.1:8000/v1/complaints/hospital/
+Accept: application/json
+Authorization: Basic user:password@123
+#Authorization: Token 7bc7b416e9d5fe4e9dd08d29d78e0834a605f17e
+ 
+
+#for adding
+###
+POST http://127.0.0.1:8000/v1/complaints/hospital/
+Content-Type: application/json
+Authorization: Basic user:password@123
+#Authorization: Token 7bc7b416e9d5fe4e9dd08d29d78e0834a605f17e
+#Authorization: Basic django1:password@123
+
+{
+
+    "title": "Unclean hospital room",
+    "description": "The room was not cleaned properly.",
+    "complaint_type": "CLEANLINESS",
+    "department": "Cleaning",
+    "priority": "HIGH"
+}
+
+
+# ================ api call for fetching a complaint ============
+
+###
+GET http://127.0.0.1:8000/v1/complaints/hospital/2/
+Accept: application/json
+Authorization: Basic user:password@123
+
+# ============ api call for updating a complaint =========
+
+###
+PUT http://127.0.0.1:8000/v1/complaints/hospital/2/
+Content-Type: application/json
+Authorization: Basic user:password@123
+
+{
+    "title": "Incorrect Billing Amount",
+    "description": "The hospital bill contains charges for services that were not provided to the patient. Please verify and correct the bill.",
+    "complaint_type": "BILLING",
+    "department": "Billing Department",
+    "priority": "MEDIUM",
+    "status": " IN PROGRESS"
+}
+
+# ========== api call for deleting a complaint ========
+
+###
+DELETE http://127.0.0.1:8000/v1/complaints/hospital/4/
+Accept: application/json
+Authorization: Basic user:password@123
+
+#filtering
+###
+GET http://127.0.0.1:8000/v1/complaints/hospital/filter/?complaint_type=BILLING&priority=MEDIUM&status=SUBMITTED
+Content-Type: application/json
+Authorization: Basic user:password@123
